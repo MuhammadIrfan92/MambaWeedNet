@@ -1,0 +1,23 @@
+dataset_name: WeedsGalore
+num_classes: 3
+num_channels: 3
+kernels: [16, 32, 48, 64, 256]
+image_size: 288
+test_image_size: 288
+batch_size: 12
+test_batch_size: 12
+epochs: 150
+learning_rate: 0.001
+weight_decay: 0
+loss_function: focal_loss
+use_flip_augmentation: true
+image_mode: auto
+mask_mode: pil
+test_l2_norm: true
+train_image_dir: /Weedsgalore/Train/RGBNIRRENDVI
+train_mask_dir: /Weedsgalore/Train/Masks_3Class
+val_image_dir: /Weedsgalore/Validation/RGBNIRRENDVI
+val_mask_dir: /Weedsgalore/Validation/Masks_3Class
+test_image_dir: /Weedsgalore/Test/RGBNIRRENDVI
+test_mask_dir: /Weedsgalore/Test/Masks_3Class
+output_dir: results/weedsgalore

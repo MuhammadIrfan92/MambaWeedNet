@@ -1,0 +1,23 @@
+dataset_name: SorghumWeed
+num_classes: 3
+num_channels: 3
+kernels: [16, 32, 48, 64, 256]
+image_size: 256
+test_image_size: 256
+batch_size: 14
+test_batch_size: 8
+epochs: 150
+learning_rate: 0.001
+weight_decay: 0
+loss_function: focal_loss
+use_flip_augmentation: true
+image_mode: auto
+mask_mode: pil
+test_l2_norm: false
+train_image_dir: /Sorghum-Dataset-Files/Patched_data/Train/Images
+train_mask_dir: /Sorghum-Dataset-Files/Patched_data/Train/Masks
+val_image_dir: /Sorghum-Dataset-Files/Patched_data/Validation/Images
+val_mask_dir: /Sorghum-Dataset-Files/Patched_data/Validation/Masks
+test_image_dir: /Sorghum-Dataset-Files/Patched_data/Test/Images
+test_mask_dir: /Sorghum-Dataset-Files/Patched_data/Test/Masks
+output_dir: results/sorghumweed
