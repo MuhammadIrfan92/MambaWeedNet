@@ -10,7 +10,7 @@ Datasets used in this study can be downloaded form the following links: \
 
 
 ## Experimental Environment Setup:
-    Use the [requirements.txt](https://github.com/MuhammadIrfan92/MambaWeedNet/blob/main/requirements.txt) to install required packages.
+Use the [requirements.txt](https://github.com/MuhammadIrfan92/MambaWeedNet/blob/main/requirements.txt) to install required packages.
 
 ## Directory map
 
