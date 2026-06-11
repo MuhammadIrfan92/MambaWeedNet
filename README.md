@@ -3,10 +3,10 @@
 Official implementation for crop and weed semantic segmentation experiments on WeedsGalore, PotatoWeed, and SorghumWeed.
 
 ## Download Datasets:
-    Datasets used in this study can be downloaded form the following links: \
-    [WeedsGalore]()\
-    [Sorghum Weed]()\
-    [Potato Weed]()
+Datasets used in this study can be downloaded form the following links: \
+[WeedsGalore](https://doidata.gfz.de/weedsgalore_e_celikkan_2024/)\
+[Sorghum Weed](https://data.mendeley.com/datasets/4hh45vkp38/4)\
+[Potato Weed](https://zenodo.org/records/15229621)
 
 
 ## Experimental Environment Setup:
