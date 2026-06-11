@@ -56,8 +56,8 @@ MambaWeedNet/
 ## Installation
 
 ```bash
-conda create -n mambaweednet python=3.10 -y
-conda activate mambaweednet
+python3 -m venv mambaweednet
+source mambaweednet/bin/activate
 pip install -r requirements.txt
 ```
 
