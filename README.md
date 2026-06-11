@@ -16,9 +16,15 @@ MambaWeedNet/
 │   ├── metrics.py
 │   ├── seed.py
 │   ├── utils.py
-│   └── models/
+│   └── model/
 │       ├── __init__.py
-│       └── mambaweed_net.py
+│       └── encoder.py
+│       └── decoder.py
+│       └── proposed_model.py
+│       └── modules/
+│           └── modules.py
+│           └── submodules.py
+
 ├── train.py
 ├── evaluate.py
 ├── predict.py
@@ -45,11 +51,6 @@ conda create -n mambaweednet python=3.10 -y
 conda activate mambaweednet
 pip install -r requirements.txt
 ```
-
-## Important model-code note
-
-The scripts expect `MambaWeed_Net` in `src/models/mambaweed_net.py`.
-Currently, that file imports your original `Utils.MambaLLM.MambaWeed_Net` if available. Before public release, copy the clean final model implementation into `src/models/mambaweed_net.py` so the repository runs without private notebook dependencies.
 
 ## Train
 
