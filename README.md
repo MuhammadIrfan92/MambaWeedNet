@@ -2,6 +2,16 @@
 
 Official implementation for crop and weed semantic segmentation experiments on WeedsGalore, PotatoWeed, and SorghumWeed.
 
+## Download Datasets:
+    Datasets used in this study can be downloaded form the following links: \
+    [WeedsGalore]()\
+    [Sorghum Weed]()\
+    [Potato Weed]()
+
+
+## Experimental Environment Setup:
+    Use the [requirements.txt](https://github.com/MuhammadIrfan92/MambaWeedNet/blob/main/requirements.txt) to install required packages.
+
 ## Directory map
 
 ```text
@@ -24,7 +34,6 @@ MambaWeedNet/
 │       └── modules/
 │           └── modules.py
 │           └── submodules.py
-
 ├── train.py
 ├── evaluate.py
 ├── predict.py
