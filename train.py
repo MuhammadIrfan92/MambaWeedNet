@@ -8,9 +8,9 @@ from tqdm import tqdm
 import random
 
 from src.datasets import build_train_val_datasets
-from src.losses import build_loss
+from src.losses import build_loss, LLMBlockOnly, kl_divergence_feature_maps, aux_weight_cosine
 from src.metrics import compute_iou_batch
-from src.models import MambaWeed_Net
+from src.model.proposed_model import MambaWeed_Net
 from src.seed import set_seed
 from src.utils import load_yaml, make_output_dir, save_history_plot, save_json, count_parameters
 
@@ -58,15 +58,19 @@ def main(config_path):
     history = {"train_loss": [], "val_loss": [], "train_iou": [], "val_iou": []}
     best_val_loss = float("inf")
     start_time = datetime.now()
+    LLm_block = LLMBlockOnly(channel=cfg["kernels"][3], layer=14).to(device)
 
     for epoch in range(cfg["epochs"]):
         model.train()
         train_loss, train_iou = 0.0, 0.0
+        lambda_aux = aux_weight_cosine(epoch, cfg["epochs"], lambda0=1.0, lambda_min=0.0)
         for images, masks in tqdm(train_loader, desc=f"Epoch {epoch + 1}/{cfg['epochs']} - Training"):
             images, masks = images.to(device), masks.to(device)
             optimizer.zero_grad()
-            logits = forward_logits(model, images)
-            loss = criterion(logits, masks)
+            logits, d4, s14 = forward_logits(model, images)
+            with torch.no_grad():
+                s14_llm = LLm_block(s14) 
+            loss = criterion(logits, masks) + lambda_aux * kl_divergence_feature_maps(s14_llm, d4)
             loss.backward()
             optimizer.step()
             train_loss += loss.item()

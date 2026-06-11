@@ -1,5 +1,5 @@
 import torch.nn as nn
-from .modules.proposed_modules import Convolution2d1x1_sel, FusionBlock, DoubleConvolution2d_sel
+from .modules.modules import *
 
 
 class Decoder(nn.Module):
@@ -11,24 +11,28 @@ class Decoder(nn.Module):
         self.upconv4 = nn.ConvTranspose2d(kernels[3], kernels[3], kernel_size=2, stride=2) # 256, 128
         self.dec4_fusion = FusionBlock(in_channels=kernels[3]*2, out_channels=kernels[3]) # 2x Convlayers
         self.dec4_1 = DoubleConvolution2d_sel(kernels[3], kernels[3], norm='batch')
-            
+        # end of 1st SMR block
+
         # 2nd SMR block
         self.red3 = Convolution2d1x1_sel(in_channels=kernels[3], out_channels=kernels[2], norm='batch', activation='relu')
         self.upconv3 = nn.ConvTranspose2d(kernels[2], kernels[2], kernel_size=2, stride=2) # 128, 64
         self.dec3_fusion = FusionBlock(in_channels=kernels[2]*2, out_channels=kernels[2]) # 2x Convlayers
         self.dec3_1 = DoubleConvolution2d_sel(kernels[2], kernels[2], norm='batch')
+        # end of 2nd SMR block
 
         # 3rd SMR block
         self.red2 = Convolution2d1x1_sel(in_channels=kernels[2], out_channels=kernels[1], norm='batch', activation='relu')
         self.upconv2 = nn.ConvTranspose2d(kernels[1], kernels[1], kernel_size=2, stride=2) # 64, 32
         self.dec2_fusion = FusionBlock(in_channels=kernels[1]*3, out_channels=kernels[1]*2) # 2x Convlayers
         self.dec2_1 = DoubleConvolution2d_sel(kernels[1]*2, kernels[1], norm='batch') # 2x Convlayers
+        # end of 3rd SMR block
 
         # 4th SMR block
         self.red1 = Convolution2d1x1_sel(in_channels=kernels[1], out_channels=kernels[0], norm='batch', activation='relu')
         self.upconv1 = nn.ConvTranspose2d(kernels[0], kernels[0], kernel_size=2, stride=2) # 32, 16
         self.dec1_fusion = FusionBlock(in_channels=kernels[0]*2, out_channels=kernels[0]) # 2x Convlayers
         self.dec1_1 = DoubleConvolution2d_sel(kernels[0], kernels[0], norm='batch') # 2x Convlayers
+        # end of 4th SMR block
 
     def forward(self, b, s11, s12, s13, s14):
         # Up the decoder Path, and incorporating skip connections from corresponding encoder stages

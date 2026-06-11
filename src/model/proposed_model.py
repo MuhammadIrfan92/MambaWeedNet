@@ -2,7 +2,10 @@
 import torch.nn as nn
 from .encoder import Encoder
 from .decoder import Decoder
-from .modules.proposed_modules import CSF
+from .modules.modules import CSF, MultiScaleCrossFusion_4VSS
+
+
+
 
 class MambaWeed_Net(nn.Module): # 1
     def __init__(self, in_channels=3, out_channels=1, kernels=[8, 16, 32, 64, 256]):
@@ -11,8 +14,8 @@ class MambaWeed_Net(nn.Module): # 1
         # Encoder  
         self.encoder = Encoder(in_channels=in_channels, out_channels=out_channels, kernels=kernels)
 
-        # Bottleneck
-        self.bottleneck = CSF(kernels=kernels)
+        # Bottleneck: (MultiScaleCrossFusion_4VSS: refered to as CSF in paper)
+        self.bottleneck = MultiScaleCrossFusion_4VSS(kernels=kernels)
 
         # Decoder
         self.decoder = Decoder(kernels=kernels)
